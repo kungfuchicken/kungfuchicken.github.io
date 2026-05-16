@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<header>
-    <h1 class="name">Daniel Shown</h1>
-    <p class="subtitle">// technologist, artist, human</p>
+<header class="header">
+    <img src="{{ get_url(path='avatar.jpg') }}" alt="Daniel Shown" class="avatar">
+    <div class="header-text">
+        <h1 class="name">Daniel Shown</h1>
+        <p class="subtitle">// technologist, artist, human</p>
+    </div>
 </header>
 
 <section class="bio">
