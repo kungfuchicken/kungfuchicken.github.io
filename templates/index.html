@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+    <h1 class="name">Daniel Shown</h1>
+    <p class="subtitle">// technologist, artist, human</p>
+</header>
+
+<section class="bio">
+    <h2 class="section-label">// about</h2>
+    {{ section.content | safe }}
+</section>
+
+<section class="links">
+    <h2 class="section-label">// links</h2>
+    <ul>
+        {% for link in section.extra.links %}
+        <li>
+            {% if link.pending %}
+            <span class="link-entry pending">
+                <span class="link-prefix">[~]</span>
+                <span class="link-label">{{ link.label }}</span>
+                <span class="link-url">{{ link.url }}</span>
+                <span class="link-status">(pending)</span>
+            </span>
+            {% else %}
+            <a href="https://{{ link.url }}" class="link-entry" rel="noopener noreferrer" target="_blank">
+                <span class="link-prefix">[&gt;]</span>
+                <span class="link-label">{{ link.label }}</span>
+                <span class="link-url">{{ link.url }}</span>
+            </a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

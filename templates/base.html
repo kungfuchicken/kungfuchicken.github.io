@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ config.title }}</title>
+    <meta name="description" content="{{ config.description }}">
+    <meta name="author" content="{{ config.extra.author }}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ config.title }}">
+    <meta property="og:description" content="{{ config.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ config.base_url }}">
+
+    <link rel="stylesheet" href="{{ get_url(path='main.css') }}">
+</head>
+<body>
+    <!-- SVG filter for scanline wobble -->
+    <svg class="crt-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="crt-noise" x="0%" y="0%" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.3"
+                    numOctaves="2" stitchTiles="stitch" result="noise">
+                    <animate attributeName="seed" from="0" to="200"
+                        dur="0.9s" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feColorMatrix type="saturate" values="0" in="noise" result="gray"/>
+                <feComponentTransfer in="gray">
+                    <feFuncA type="linear" slope="0.12"/>
+                </feComponentTransfer>
+            </filter>
+            <filter id="crt-warp">
+                <feTurbulence type="turbulence" baseFrequency="0.01 0.08"
+                    numOctaves="3" seed="2" result="turbulence">
+                    <animate attributeName="seed" from="1" to="100"
+                        dur="4s" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="turbulence"
+                    scale="4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
+    <div class="crt-noise"></div>
+    <div class="crt-scanline">
+        <div class="crt-beam"></div>
+        <div class="crt-hotspot"></div>
+    </div>
+    <div class="tui">
+        <div class="quote quote-top">
+            <p>&ldquo;In the light of the moon a little egg lay on a leaf&rdquo;</p>
+            <cite>Eric Carle, <em>The Very Hungry Caterpillar</em></cite>
+        </div>
+        <div class="tui-frame">
+            <main class="tui-content">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+        <div class="quote quote-bottom">
+            <p>&ldquo;Service is prayer.&rdquo;</p>
+            <cite>&lsquo;Abdu&rsquo;l-Bah&aacute;, <em>Paris Talks</em></cite>
+        </div>
+    </div>
+</body>
+</html>

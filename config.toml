@@ -1,0 +1,15 @@
+base_url = "https://kungfuchicken.github.io"
+title = "Daniel Shown"
+description = "Technology leader, artist, researcher, and human."
+default_language = "en"
+
+compile_sass = true
+build_search_index = false
+generate_feeds = false
+
+[markdown.highlighting]
+style = "class"
+theme = "github-dark"
+
+[extra]
+author = "Daniel Shown"
